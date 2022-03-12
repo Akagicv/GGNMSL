@@ -51,6 +51,6 @@
 
 ### 鸣谢
 
-- [GWYOG大佬的pcrsealkiller项目](https://github.com/GWYOG/GWYOG-Hoshino-plugins/tree/master/pokemanpcr)
+- [GWYOG大佬的pcrsealkiller项目](https://github.com/GWYOG/GWYOG-Hoshino-plugins/tree/master/pcrsealkiller)
 
 
