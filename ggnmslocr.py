@@ -22,7 +22,7 @@ keyword = keywordread.split() #以空格作为数组分隔符获取关键词
 
 async def check_gif(bot, img):
     r = await bot.call_action(action='get_image', file=img)
-    return r['filename'].endswith('gif')
+    return r['filename'].endswith('gif')#gif图片不检查
 
 async def gg_image(bot, ev, img):
     check_gif_result = await check_gif(bot, img)
@@ -60,18 +60,18 @@ async def download(url, path):
 async def check_image(bot, ev, img):
     try:
         r = await bot.call_action(action='.ocr_image', image=img)
-        kw = gg_word_ocr(r)
+        kw = gg_word_ocr(r)#等待qq自带ocr识别
         if kw:
-            return True
+            return True#如果结果为有关键词内的语言，则返回真，触发撤回
         else:
-            image_path = f'{FILE_FOLDER_PATH}{img}.jpg'
-            image_info = await bot.call_action(action='get_image', file=img)
-            await download(image_info['url'], image_path)
-            qr_img = opencv_tool.qr_scan(image_path)
-            if os.path.exists(image_path):
-                os.remove(image_path)
+            image_path = f'{FILE_FOLDER_PATH}{img}.jpg'#定义图片位置
+            image_info = await bot.call_action(action='get_image', file=img)#获取图片链接
+            await download(image_info['url'], image_path)#下载图片
+            qr_img = opencv_tool.qr_scan(image_path)#使用opencv检查图片
+            if os.path.exists(image_path): #判断图片是否存在
+                os.remove(image_path) #删除图片
             if qr_img:
-                return True
+                return True 
             else:
                 record_ocr(ev.group_id, img)
                 return False
